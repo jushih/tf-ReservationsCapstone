@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { listReservations } from "../utils/api";
-import ErrorAlert from "../layout/ErrorAlert";
+import { listReservations, listTables } from "../utils/api";
+import DateControls from "./DateControls";
+import ReservationsList from "../reservations/ReservationsList";
+import TablesList from "../tables/TablesList";
+import useQuery from "../utils/useQuery";
 
 /**
  * Defines the dashboard page.
@@ -10,27 +13,59 @@ import ErrorAlert from "../layout/ErrorAlert";
  */
 function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
-  const [reservationsError, setReservationsError] = useState(null);
+  const [tables, setTables] = useState([]);
 
-  useEffect(loadDashboard, [date]);
-
-  function loadDashboard() {
-    const abortController = new AbortController();
-    setReservationsError(null);
-    listReservations({ date }, abortController.signal)
-      .then(setReservations)
-      .catch(setReservationsError);
-    return () => abortController.abort();
+  const dateQuery = useQuery().get("date");
+  if (dateQuery) {
+    date = dateQuery;
   }
+
+  useEffect(() => {
+    async function loadDashboard() {
+      try {
+        const reservesResponse = listReservations({ date });
+        const reservesFromAPI = await reservesResponse;
+        //console.log('reserves',reservesFromAPI)
+        setReservations(reservesFromAPI);
+      } catch (error) {
+        console.log("Read error: ", error);
+      }
+    }
+    loadDashboard();
+  }, [date]);
+
+  useEffect(() => {
+    async function loadTables() {
+      try {
+        const tablesResponse = listTables();
+        const tablesFromAPI = await tablesResponse;
+        //console.log(tablesFromAPI)
+        setTables(tablesFromAPI);
+      } catch (error) {
+        console.log("Read error: ", error);
+      }
+    }
+    loadTables();
+  }, [date]);
+  //console.log('reserves',reservations)
 
   return (
     <main>
-      <h1>Dashboard</h1>
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for date</h4>
+      <div className="FormContainer">
+        <h2>Dashboard</h2>
+        <div className="d-md-flex mb-3">
+          <h5 className="mb-0">Reservations for {date}</h5>
+        </div>
+        <DateControls date={date} />
       </div>
-      <ErrorAlert error={reservationsError} />
-      {JSON.stringify(reservations)}
+      <ReservationsList reservations={reservations} date={date} />
+      <div>
+        <br />
+        <div className="FormContainer">
+          <h5 className="mb-0">Tables</h5>
+        </div>
+        <TablesList tables={tables} />
+      </div>
     </main>
   );
 }

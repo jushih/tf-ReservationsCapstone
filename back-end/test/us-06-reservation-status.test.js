@@ -247,6 +247,8 @@ describe("US-06 - Reservation status", () => {
       reservationOne = await knex("reservations")
         .orderBy(["reservation_date", "reservation_time"])
         .first();
+
+      console.log('123:',reservationOne)
       tableOne = await knex("tables").orderBy("table_name").first();
     });
 
@@ -270,6 +272,7 @@ describe("US-06 - Reservation status", () => {
       expect(finishResponse.body.error).toBeUndefined();
       expect(finishResponse.status).toBe(200);
 
+      console.log('345:',reservationOne.reservation_date)
       const reservationsResponse = await request(app)
         .get(
           `/reservations?date=${asDateString(reservationOne.reservation_date)}`
@@ -288,6 +291,8 @@ describe("US-06 - Reservation status", () => {
 });
 
 function asDateString(date) {
+//console.log('date test',date)
+//const date = new Date(dateRaw)
   return `${date.getFullYear().toString(10)}-${(date.getMonth() + 1)
     .toString(10)
     .padStart(2, "0")}-${date.getDate().toString(10).padStart(2, "0")}`;

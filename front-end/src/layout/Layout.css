@@ -1,4 +1,45 @@
 .side-bar {
   background-color: #393a44;
-  min-width: 200px;
+  min-width: 100%;
+}
+
+.navbar {
+  margin: 10px;
+}
+
+.NotFound,
+.FormContainer h4 {
+  text-align: center;
+  margin: 10px;
+  margin-top: 20px;
+}
+
+.FormContainer h2,
+.h5,
+.ReservationsList,
+.DateControls {
+  margin: 10px;
+  margin-top: 20px;
+}
+
+.buttons {
+  display: flex;
+}
+
+.btn {
+  margin-right: 10px;
+}
+@media all and (min-width: 1025px) {
+  .side-bar {
+    min-width: 200px;
+    min-height: calc(100vh);
+  }
+  .sidebar-brand-text {
+    margin: 10px;
+  }
+
+  div.FormContainer {
+    max-width: 500px;
+    margin-left: 20px;
+  }
 }

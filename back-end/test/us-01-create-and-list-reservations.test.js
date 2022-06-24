@@ -329,6 +329,7 @@ describe("US-01 - Create and list reservations", () => {
         .set("Accept", "application/json")
         .send({ data });
 
+      //console.log(response.body,'error')
       expect(response.body.error).toContain("people");
       expect(response.status).toBe(400);
     });
@@ -348,6 +349,7 @@ describe("US-01 - Create and list reservations", () => {
         .set("Accept", "application/json")
         .send({ data });
 
+      console.log('data is valid',response.body)
       expect(response.body.error).toBeUndefined();
       expect(response.body.data).toEqual(
         expect.objectContaining({
