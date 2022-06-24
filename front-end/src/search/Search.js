@@ -58,7 +58,7 @@ function Search() {
             <h6>Enter Phone Number</h6>
           </label>
           <input
-            class="form-control"
+            className="form-control"
             name="mobile_number"
             id="mobile_number"
             type="tel"
@@ -68,12 +68,12 @@ function Search() {
           />
         </div>
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Find
         </button>
         <button
           type="button"
-          class="btn btn-secondary mr-2"
+          className="btn btn-secondary mr-2"
           onClick={cancelHandler}
         >
           Cancel

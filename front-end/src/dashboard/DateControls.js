@@ -6,17 +6,17 @@ function DateControls({ date }) {
   return (
     <div className="DateControls">
       <Link to={`/dashboard?date=${previous(date)}`}>
-        <button type="submit" class="btn btn-dark">
+        <button type="submit" className="btn btn-dark">
           Previous
         </button>
       </Link>
       <Link to={`/dashboard?date=${today(date)}`}>
-        <button type="submit" class="btn btn-dark">
+        <button type="submit" className="btn btn-dark">
           Today
         </button>
       </Link>
       <Link to={`/dashboard?date=${next(date)}`}>
-        <button type="submit" class="btn btn-dark">
+        <button type="submit" className="btn btn-dark">
           Next
         </button>
       </Link>

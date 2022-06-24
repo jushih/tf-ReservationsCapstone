@@ -28,8 +28,8 @@ function TablesList({ tables }) {
   return (
     <div className="ReservationsList">
       <ErrorAlert error={reservationsError} />
-      <div class="table-responsive">
-        <table class="table table-striped">
+      <div className="table-responsive">
+        <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">Table Name</th>
@@ -38,31 +38,25 @@ function TablesList({ tables }) {
               <th scope="col"></th>
             </tr>
 
-            {Object.entries(t).map(([key, value]) => {
+            {Object.entries(t).map(([key]) => {
               let table = t[key];
               return (
-                <tr>
+                <tr key={t[key].table_id}>
                   <td>{t[key].table_name}</td>
                   <td>{t[key].status}</td>
                   <td>{t[key].capacity}</td>
 
-                  {t[key].status === "Free" ? (
-                    <div>
-                      <td></td>
-                    </div>
-                  ) : (
-                    <div>
-                      <td>
-                        <button
-                          data-table-id-finish={table.table_id}
-                          value={table.table_id}
-                          class="btn btn-danger"
-                          onClick={finishHandler}
-                        >
-                          Finish
-                        </button>
-                      </td>
-                    </div>
+                  {t[key].status === "Free" ? null : (
+                    <td>
+                      <button
+                        data-table-id-finish={table.table_id}
+                        value={table.table_id}
+                        className="btn btn-danger"
+                        onClick={finishHandler}
+                      >
+                        Finish
+                      </button>
+                    </td>
                   )}
                 </tr>
               );

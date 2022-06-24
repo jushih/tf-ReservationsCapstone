@@ -43,8 +43,8 @@ function ReservationsList({ reservations, date, search }) {
     return (
       <div className="ReservationsList">
         <ErrorAlert error={reservationsError} />
-        <div class="table-responsive-sm w-80 d-block d-sm-table">
-          <table class="table table-striped">
+        <div className="table-responsive-sm w-80 d-block d-sm-table">
+          <table className="table table-striped">
             <thead>
               <tr>
                 <th scope="col">Name</th>
@@ -66,21 +66,21 @@ function ReservationsList({ reservations, date, search }) {
                     r[key].status.charAt(0).toUpperCase() +
                     r[key].status.slice(1);
                   return (
-                    <tr>
+                    <tr key={reservation_id}>
                       <td>{r[key].first_name + " " + r[key].last_name}</td>
                       <td>{r[key].mobile_number}</td>
-                      <td>{r[key].reservation_date}</td>
-                      <td>{r[key].reservation_time}</td>
+                      <td>{r[key].reservation_date.split('T')[0]}</td>
+                      <td>{r[key].reservation_time.substring(0, r[key].reservation_time.length-3)}</td>
                       <td>{r[key].people}</td>
                       <td>{status}</td>
 
-                      {status === "booked" ? (
-                        <div>
+                      {status === "Booked" ? (
+                        <>
                           <td>
                             <Link to={`/reservations/${reservation_id}/seat`}>
                               <button
                                 href={`/reservations/${reservation_id}/seat`}
-                                class="btn btn-primary"
+                                className="btn btn-primary"
                               >
                                 Seat
                               </button>
@@ -90,7 +90,7 @@ function ReservationsList({ reservations, date, search }) {
                             <Link to={`/reservations/${reservation_id}/edit`}>
                               <button
                                 href={`/reservations/${reservation_id}/edit`}
-                                class="btn btn-primary"
+                                className="btn btn-primary"
                               >
                                 Edit
                               </button>
@@ -101,13 +101,13 @@ function ReservationsList({ reservations, date, search }) {
                               data-reservation-id-cancel={reservation_id}
                               value={reservation_id}
                               type="submit"
-                              class="btn btn-danger"
+                              className="btn btn-danger"
                               onClick={cancelHandler}
                             >
                               Cancel
                             </button>
                           </td>
-                        </div>
+                        </>
                       ) : null}
                     </tr>
                   );
