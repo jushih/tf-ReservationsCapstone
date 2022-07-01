@@ -24,12 +24,11 @@ function Table() {
     if (!table.table_name || !table.capacity) {
       window.confirm("Please enter all fields.");
     } else {
-      try {
-        await createTable(table);
-        history.push(0);
-      } catch (err) {
-        setReservationsError(err.message);
-      }
+
+      createTable(table)
+      .then(() => history.push('/'))
+      .catch(err => {setReservationsError(err.message)})
+
     }
   };
 

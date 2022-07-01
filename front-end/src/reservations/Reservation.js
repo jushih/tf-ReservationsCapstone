@@ -95,27 +95,25 @@ function Reservation({ reservation_id }) {
     }
   };
 
-  const submitFormHandler = async (event) => {
+  const SubmitFormHandler = async (event) => {
     event.preventDefault();
 
     //create a new reservation
     if (flow === "Create") {
       console.log(reservation);
 
-      try {
-        await createReservation(reservation);
-        history.push(`/`);
-      } catch (err) {
-        setReservationsError(err.message);
-      }
+      createReservation(reservation)
+      .then(() => history.push(`/dashboard?date=${reservation.reservation_date}`))
+      .catch(err => {setReservationsError(err.message)})
+            
     }
     //edit a reservation
     else if (flow === "Edit") {
-      try {
-        await updateReservation(reservation);
-      } catch (err) {
-        setReservationsError(err.message);
-      }
+
+      updateReservation(reservation)
+      .then(() => history.go(0))
+      .catch(err => {setReservationsError(err.message)})
+
     } else {
       console.log("Invalid flow.");
     }
@@ -132,7 +130,7 @@ function Reservation({ reservation_id }) {
 
       <ErrorAlert error={reservationsError} />
 
-      <form onSubmit={submitFormHandler}>
+      <form onSubmit={SubmitFormHandler}>
         <div className="form-group">
           <label>
             <h6>First Name</h6>

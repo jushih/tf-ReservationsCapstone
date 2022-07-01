@@ -18,12 +18,11 @@ function ReservationsList({ reservations, date, search }) {
         "Do you want to cancel this reservation? This cannot be undone."
       ) === true
     ) {
-      try {
-        await updateStatus(reservation_id, "cancelled");
-        history.go(0);
-      } catch (err) {
-        setReservationsError(err.message);
-      }
+
+      updateStatus(reservation_id, "cancelled")
+      .then(() => history.go(0))
+      .catch(err => {setReservationsError(err.message)})
+
     }
   };
 
