@@ -49,11 +49,15 @@ function ReservationForm({ reservation_id }) {
   }, [reservation_id]);
 
   const changeHandler = (event) => {
+
+    /*
     if (event.target.name === "reservation_date") {
       const weekday = new Date(event.target.value).getUTCDay();
       const reserveDay = new Date(event.target.value).getTime();
       const today = new Date();
 
+
+      
       if (weekday === 2 && reserveDay < today) {
         setReservationsError(
           "Reservations must be in the future. The restaurant is closed on Tuesdays."
@@ -66,7 +70,8 @@ function ReservationForm({ reservation_id }) {
         setReservationsError(null);
       }
     }
-
+  
+    
     if (event.target.name === "reservation_time") {
       const open = 1030;
       const close = 2130;
@@ -80,6 +85,7 @@ function ReservationForm({ reservation_id }) {
         );
       }
     }
+    */ 
 
     if (event.target.name === "people") {
       console.log("people", event.target.value);
@@ -94,6 +100,7 @@ function ReservationForm({ reservation_id }) {
       });
     }
   };
+  
 
   const SubmitFormHandler = async (event) => {
     event.preventDefault();
