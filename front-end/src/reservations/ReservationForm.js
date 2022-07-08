@@ -118,7 +118,7 @@ function ReservationForm({ reservation_id }) {
     else if (flow === "Edit") {
 
       updateReservation(reservation)
-      .then(() => history.go(0))
+      .then(() => history.push(`/dashboard?date=${reservation.reservation_date}`))
       .catch(err => {setReservationsError(err.message)})
 
     } else {

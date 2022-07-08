@@ -21,6 +21,11 @@ function Table() {
 
     //console.log("submitting form...", table);
 
+    createTable(table)
+    .then(() => history.push('/'))
+    .catch(err => {setReservationsError(err.message)})
+
+    /*
     if (!table.table_name || !table.capacity) {
       window.confirm("Please enter all fields.");
     } else {
@@ -30,6 +35,7 @@ function Table() {
       .catch(err => {setReservationsError(err.message)})
 
     }
+    */
   };
 
   const cancelHandler = async (event) => {

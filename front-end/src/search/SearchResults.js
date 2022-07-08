@@ -9,7 +9,7 @@ function SearchResults(search) {
       <div className="FormContainer">
         <br />
         <h4>
-          <i>No reservations matching phone number.</i>
+          <i>No reservations found</i>
         </h4>
       </div>
     );

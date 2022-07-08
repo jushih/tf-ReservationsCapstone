@@ -65,7 +65,7 @@ function ReservationsList({ reservations, date, search }) {
                     r[key].status.charAt(0).toUpperCase() +
                     r[key].status.slice(1);
                   return (
-                    <tr key={reservation_id}>
+                    <tr key={reservation_id} className="data-reservation-id-status">
                       <td>{r[key].first_name + " " + r[key].last_name}</td>
                       <td>{r[key].mobile_number}</td>
                       <td>{r[key].reservation_date.split('T')[0]}</td>

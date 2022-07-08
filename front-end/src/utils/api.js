@@ -60,7 +60,7 @@ async function fetchJson(url, options, onCancel) {
 
 export async function listReservations(params, signal) {
   const url = new URL(`${API_BASE_URL}/reservations`);
-  console.log('call',url)
+  //console.log('call',url)
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.append(key, value.toString())
   );
@@ -84,7 +84,7 @@ export async function listReservations(params, signal) {
 // GET specific reservation for editing
 export async function lookupReservations(reservation_id, signal) {
   const url = new URL(`${API_BASE_URL}/reservations/${reservation_id}`);
-  console.log('call',url)
+  //console.log('call',url)
   Object.entries(reservation_id).forEach(([key, value]) =>
     url.searchParams.append(key, value.toString())
   );
@@ -97,7 +97,7 @@ export async function lookupReservations(reservation_id, signal) {
 // PUT updates reservation
  export async function updateReservation(reservation, signal) {
   const url = new URL(`${API_BASE_URL}/reservations/${reservation.reservation_id}`);
-  console.log('call',url)
+  //console.log('call',url)
   const options = {
     method: "PUT",
     headers,
@@ -111,7 +111,7 @@ export async function lookupReservations(reservation_id, signal) {
 // PUT updates reservation status
 export async function updateStatus(reservation_id, status, signal) {
   const url = new URL(`${API_BASE_URL}/reservations/${reservation_id}/status`);
-  console.log('call',url)
+  //console.log('call',url)
   const options = {
     method: "PUT",
     headers,
@@ -124,7 +124,7 @@ export async function updateStatus(reservation_id, status, signal) {
 // GETS all reservations by phone number
 export async function searchReservations(mobile_number, signal) {
   const url = `${API_BASE_URL}/reservations?mobile_number=${mobile_number}`;
-  console.log('call',url)
+  //console.log('call',url)
   const options = {
     method: "GET",
     headers,
@@ -136,7 +136,7 @@ export async function searchReservations(mobile_number, signal) {
  // GET all tables
  export async function listTables(signal) {
   const url = new URL(`${API_BASE_URL}/tables`);
-  console.log('call',url)
+  //console.log('call',url)
   const options = {
     method: "GET",
     headers,
@@ -148,7 +148,7 @@ export async function searchReservations(mobile_number, signal) {
  // POST new table
  export async function createTable(table, signal) {
   const url = new URL(`${API_BASE_URL}/tables`);
-  console.log('call',url)
+  //console.log('call',url)
   const options = {
     method: "POST",
     headers,
@@ -161,7 +161,7 @@ export async function searchReservations(mobile_number, signal) {
  // PUT seat reservation
  export async function seatTable(table_id, reservation_id, signal) {
   const url = new URL(`${API_BASE_URL}/tables/${table_id}/seat`);
-  console.log('call',url)
+  //console.log('call',url)
   const options = {
     method: "PUT",
     headers,
@@ -175,7 +175,7 @@ export async function searchReservations(mobile_number, signal) {
 // DELETE table
  export async function finishTable(table_id, signal) {
   const url = new URL(`${API_BASE_URL}/tables/${table_id}/seat`);
-  console.log('call',url)
+  //console.log('call',url)
   const options = {
     method: "DELETE",
     headers,
