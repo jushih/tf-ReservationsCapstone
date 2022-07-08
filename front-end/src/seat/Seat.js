@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { listTables } from "../utils/api";
 import SeatList from "./SeatList";
 
 function Seat() {
   const { reservation_id } = useParams();
-  const history = useHistory();
   const [tables, setTables] = useState([]);
 
   useEffect(() => {
@@ -22,10 +21,6 @@ function Seat() {
     loadTables();
   }, []);
 
-  const cancelHandler = async (event) => {
-    event.preventDefault();
-    history.go(-1);
-  };
 
   return (
     <div className="FormContainer">
@@ -33,13 +28,7 @@ function Seat() {
 
       <SeatList tables={tables} reservation_id={reservation_id} />
 
-      <button
-        type="button"
-        class="btn btn-secondary mr-2"
-        onClick={cancelHandler}
-      >
-        Cancel
-      </button>
+
     </div>
   );
 }

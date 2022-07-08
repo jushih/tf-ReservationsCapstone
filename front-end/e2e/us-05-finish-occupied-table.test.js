@@ -68,6 +68,8 @@ describe("US-05 - Finish an occupied table - E2E", () => {
         "occupied"
       );
 
+      console.log('######### ran and found table status')
+
       expect(containsOccupied).toBe(true);
 
       const finishButtonSelector = `[data-table-id-finish="${table.table_id}"]`;

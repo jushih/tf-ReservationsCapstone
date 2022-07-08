@@ -1,19 +1,31 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { seatTable } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function SeatList({ tables, reservation_id }) {
   const history = useHistory();
   const [reservationsError, setReservationsError] = useState(null);
+  const [tableId, setTableId] = useState([]);
   let t = tables;
+
+  const cancelHandler = async (event) => {
+    event.preventDefault();
+    history.go(-1);
+  };
+
+  const changeSeatHandler = (event) => {
+    setTableId(event.target.value);
+    //console.log(tableId)
+  };
 
   const seatHandler = async (event) => {
     event.preventDefault();
     try {
-      const table_id = event.target.value;
-      await seatTable(table_id, reservation_id);
-      history.go(-1);
+      //console.log('submit',tableId);
+      await seatTable(tableId, reservation_id);
+      history.push(`/dashboard`)
+      
     } catch (err) {
       setReservationsError(err.message);
     }
@@ -22,43 +34,37 @@ function SeatList({ tables, reservation_id }) {
   return (
     <div className="ReservationsList">
       <ErrorAlert error={reservationsError} />
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Table Name</th>
-              <th scope="col">Status</th>
-              <th scope="col">Capacity</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
 
-            {Object.entries(t).map(([key, value]) => {
-              let table = t[key];
-              return (
-                <tr>
-                  <td>{t[key].table_name}</td>
-                  <td>{t[key].status}</td>
-                  <td>{t[key].capacity}</td>
-                  <td>
-                    <Link to={`/tables/${table.table_id}/seat`}>
-                      <button
-                        href={`/tables/${table.table_id}/seat`}
-                        class="btn btn-primary"
-                        value={table.table_id}
-                        onClick={seatHandler}
-                      >
-                        Submit
-                      </button>
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+
+      <form onSubmit={seatHandler}>
+      <select  name="table_id" className="form-control" onChange={changeSeatHandler}>
+        <option defaultValue>Select a seat...</option>
+
+        {Object.entries(t).map(([key, value]) => {
+          let table = t[key];
+          return (
+            <option key={table.table_id} value={table.table_id}>
+              {table.table_name} - {table.capacity}
+            </option>
+          );
+        })}
+      </select>
+      <p />
+
+      <button className="btn btn-primary" type="submit">
+        Submit
+      </button>
+
+      <button
+        type="button"
+        className="btn btn-secondary mr-2"
+        onClick={cancelHandler}
+      >
+        Cancel
+      </button>
+
+      </form>
+
     </div>
   );
 }

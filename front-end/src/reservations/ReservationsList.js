@@ -65,13 +65,13 @@ function ReservationsList({ reservations, date, search }) {
                     r[key].status.charAt(0).toUpperCase() +
                     r[key].status.slice(1);
                   return (
-                    <tr key={reservation_id} className="data-reservation-id-status">
+                    <tr key={reservation_id} className="data-reservation-id-status" >
                       <td>{r[key].first_name + " " + r[key].last_name}</td>
                       <td>{r[key].mobile_number}</td>
                       <td>{r[key].reservation_date.split('T')[0]}</td>
                       <td>{r[key].reservation_time.substring(0, r[key].reservation_time.length-3)}</td>
                       <td>{r[key].people}</td>
-                      <td>{status}</td>
+                      <td data-reservation-id-status={reservation_id}>{status}</td>
 
                       {status === "Booked" ? (
                         <>

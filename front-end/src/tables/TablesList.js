@@ -43,7 +43,7 @@ function TablesList({ tables }) {
               return (
                 <tr key={t[key].table_id}>
                   <td>{t[key].table_name}</td>
-                  <td>{t[key].status}</td>
+                  <td data-table-id-status={table.table_id}>{t[key].status}</td>
                   <td>{t[key].capacity}</td>
 
                   {t[key].status === "Free" ? null : (
