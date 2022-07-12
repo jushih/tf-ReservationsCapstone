@@ -85,8 +85,8 @@ async function tableExists(req, res, next) {
 
 // validate table is not occupied
 function validateOccupancy(req, res, next) {
-  const { status } = res.locals.table;
-  if (status.toLowerCase() === "occupied") {
+  const { reservation_id } = res.locals.table;
+  if (reservation_id !== null) {
     return next();
   } else {
     return next({
@@ -151,6 +151,7 @@ async function finish(req, res) {
   const updatedTable = {
     ...table,
     status: "Free",
+    reservation_id: null,
   };
 
   const data = await service.finish(updatedTable);

@@ -127,11 +127,15 @@ describe("US-06 - Reservation status - E2E", () => {
         fullPage: true,
       });
 
+      console.log('########## checkpoint 1')
+
       expect(
         await page.$(
           `[data-reservation-id-status="${reservation.reservation_id}"]`
         )
       ).toBeNull();
+
+      console.log('######### checkpoint 2')
     });
   });
 });
